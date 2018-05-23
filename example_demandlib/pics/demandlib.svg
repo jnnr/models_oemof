@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="170mm"
+   height="50mm"
+   viewBox="0 0 169.99999 50"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.1 r15371"
+   sodipodi:docname="demandlib.svg">
+  <defs
+     id="defs2">
+    <marker
+       inkscape:stockid="Arrow2Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Lend"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path4601"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Lstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Lstart"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path4598"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="matrix(1.1,0,0,1.1,1.1,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="201.44775"
+     inkscape:cy="86.305729"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     showguides="false"
+     inkscape:snap-bbox="true"
+     inkscape:bbox-paths="true"
+     inkscape:bbox-nodes="true"
+     inkscape:snap-global="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1031"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(29.650605,-228.44485)">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:3.22210813px;line-height:1;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20138176"
+       x="-28.572086"
+       y="238.98178"
+       id="text4487"><tspan
+         sodipodi:role="line"
+         x="-28.572086"
+         y="238.98178"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.22210813px;line-height:1.20000005;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.20138176"
+         id="tspan4505">Temperature timeseries</tspan><tspan
+         sodipodi:role="line"
+         x="-28.572086"
+         y="242.84831"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.22210813px;line-height:1.20000005;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.20138176"
+         id="tspan4509">Holidays</tspan><tspan
+         sodipodi:role="line"
+         x="-28.572086"
+         y="246.71484"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.22210813px;line-height:1.20000005;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.20138176"
+         id="tspan4491">Building types</tspan><tspan
+         sodipodi:role="line"
+         x="-28.572086"
+         y="250.58136"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.22210813px;line-height:1.20000005;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.20138176"
+         id="tspan4519">Total annual demand</tspan></text>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4523"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"><flowRegion
+         id="flowRegion4525"><rect
+           id="rect4527"
+           width="7.8571429"
+           height="52.857143"
+           x="132.14285"
+           y="104.70754" /></flowRegion><flowPara
+         id="flowPara4529" /></flowRoot>    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:8.05527115px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20138176"
+       x="105.16176"
+       y="271.0929"
+       id="text4533"><tspan
+         sodipodi:role="line"
+         id="tspan4531"
+         x="105.16176"
+         y="271.0929"
+         style="font-size:3.22210813px;stroke-width:0.20138176">heat demand profiles</tspan></text>
+    <rect
+       style="opacity:1;fill:#57dfd0;fill-opacity:1;stroke-width:0.25510326"
+       id="rect4546"
+       width="53.941547"
+       height="16.685919"
+       x="28.65818"
+       y="248.6936" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:8.05527115px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20138176"
+       x="47.094612"
+       y="258.23776"
+       id="text4550"><tspan
+         sodipodi:role="line"
+         id="tspan4548"
+         x="47.094612"
+         y="258.23776"
+         style="font-size:3.22210813px;stroke-width:0.20138176">demandlib</tspan></text>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4556"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"><flowRegion
+         id="flowRegion4558"><rect
+           id="rect4560"
+           width="8.5714283"
+           height="45"
+           x="454.28571"
+           y="125.42183" /></flowRegion><flowPara
+         id="flowPara4562" /></flowRoot>    <path
+       style="fill:none;stroke:#000000;stroke-width:0.40000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#Arrow2Lstart)"
+       d="M 28.291396,254.70465 C 17.870859,253.09656 21.386204,244.60355 9.7065549,243.74684"
+       id="path4574"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.40000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Lend)"
+       d="m 82.601085,258.40863 c 10.953879,0.14774 5.512607,8.5745 20.017495,11.61145"
+       id="path4578"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+  </g>
+</svg>

@@ -94,6 +94,8 @@ def run_model(params, wind_invest=False, pv_invest=False, storage_invest=False):
     energysystem.results['main'] = processing.results(om)
     energysystem.results['meta'] = processing.meta_results(om)
     energysystem.results['params'] = params
-    energysystem.dump(dpath=os.path.dirname(os.path.abspath(__file__)), filename="varation_1")
+    if not os.path.exists('results'):
+        os.makedirs('results')
+    energysystem.dump(dpath=os.path.dirname(os.path.abspath(__file__)), filename="results/varation_1")
 
 run_model(params, wind_invest=False, pv_invest=False)

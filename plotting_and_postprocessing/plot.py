@@ -7,6 +7,9 @@ from oemof import solph
 from oemof.outputlib import views, processing
 import oemof_visio as oev
 
+if not os.path.exists('results'):
+    os.makedirs('results')
+
 def shape_legend(node, reverse=False, **kwargs):
     handels = kwargs['handles']
     labels = kwargs['labels']
@@ -40,9 +43,22 @@ def shape_legend(node, reverse=False, **kwargs):
     axes.legend(**parameter)
     return axes
 
+def shape_legend_2(node, reverse=False, **kwargs):
+    handels = kwargs['handles']
+    labels = kwargs['labels']
+    axes = kwargs['ax']
+    parameter = {}
+
+
+    parameter['bbox_to_anchor'] = kwargs.get('bbox_to_anchor', (1, 0.5))
+    parameter['loc'] = kwargs.get('loc', 'center left')
+
+    axes.legend(**parameter)
+    return axes
+
 
 energysystem = solph.EnergySystem()
-energysystem.restore(dpath=os.path.dirname(os.path.abspath(__file__)), filename="varation_1")
+energysystem.restore(dpath=os.path.dirname(os.path.abspath(__file__)), filename="results/varation_1")
 
 # Getting results and views
 results = energysystem.results['main']
@@ -78,7 +94,7 @@ my_plot = oev.plot.io_plot('electricity', plot_slice, cdict=cdict,
                            inorder=inorder, ax=ax,
                            smooth=False)
 
-ax = shape_legend('electricity', **my_plot)
+ax = shape_legend_2('electricity', **my_plot)
 oev.plot.set_datetime_ticks(ax, plot_slice.index, tick_distance=48,
                             date_format='%d-%m-%H', offset=12)
 
@@ -87,7 +103,8 @@ ax.set_xlabel('2012')
 ax.set_title("Electricity demand and production")
 # ax.tick_params()
 ax.get_figure()
-fig.savefig('dispatch.png', dpi=100, bbox_inches='tight')
+#plt.show()
+fig.savefig('results/dispatch.png', dpi=100, bbox_inches='tight')
 
 
 
@@ -111,7 +128,7 @@ cdict = {
 # plt.yticks(fontsize=25)
 # plt.ylabel('Power [MW]', fontsize=25)
 # plt.title("Installed capacities", fontsize=25)
-# plt.savefig('investment.png', dpi=100)
+# plt.savefig('results/investment.png', dpi=100)
 # # plt.show()
 
 
@@ -122,4 +139,4 @@ ax.set_xticks(range(len(params)))
 ax.set_xticklabels(list(params.keys()))
 ax.set_ylabel('Power [MW]')
 ax.set_title("Installed capacities")
-fig.savefig('investment_2.png', dpi=100)
+fig.savefig('results/investment_2.png', dpi=100)

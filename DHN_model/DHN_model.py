@@ -3,6 +3,8 @@ from math import sqrt
 import matplotlib.pyplot as plt
 import pandas as pd
 
+# Reference: Xuezhi Liu Phd 2014 https://orca.cf.ac.uk/57830/1/2014LiuXPhD.pdf
+
 # load incidence matrix
 in_mat = pd.read_csv('incidence_matrix.csv', header=0, index_col='pipe_no')
 print(in_mat.columns.tolist())

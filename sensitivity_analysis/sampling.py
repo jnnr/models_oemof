@@ -46,3 +46,8 @@ print([(key,value) for (key, value) in param_min_max.items()])
 
 # para_combs = list(it.product(pa, ra, me, ters))
 # print('here', para_combs[2])
+
+# initialize structure of the model
+# set values for parameters
+# run, get results, store them
+# iterate model experiments according to parameter lists

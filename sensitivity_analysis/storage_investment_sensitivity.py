@@ -86,26 +86,32 @@ def run_model(params, wind_invest=False, pv_invest=False, storage_invest=False):
     logging.info('Optimise the energy system')
 
     om = solph.Model(energysystem)
+    test_var = 2
+    print(test_var)
 
     logging.info('Solve the optimization problem')
     om.solve(solver='cbc')
 
     string_results = processing.convert_keys_to_strings(processing.results(om))
     electricity_results = views.node(string_results, 'electricity')
-    param_results = processing.convert_keys_to_strings(processing.param_results(energysystem))
-    param_results_scalars = {key: value['scalars'] for (key,value) in param_results.items()}
+    param_dict = processing.convert_keys_to_strings(processing.parameter_as_dict(energysystem))
+    param_dict_scalars = {key: value['scalars'] for (key,value) in param_dict.items()}
 
-    # save
-    directory = 'results/'
-    if not os.path.exists(directory):
-        os.makedirs(directory)
-    electricity_results['sequences'].to_csv(directory+'el_seq.csv')
-    electricity_results['scalars'].to_csv(directory+'el_scal.csv')
+    print(string_results.keys())
+    print(string_results[('wind','electricity')]['scalars']['invest'])
+    print(string_results[('pv','electricity')]['scalars']['invest'])
 
-    results_filename = directory+'results_dict.pickle'
-    pickle_out = open(results_filename, "wb")
-    pickle.dump(param_results_scalars, pickle_out)
-    pickle_out.close()
+    # # save
+    # directory = 'results/'
+    # if not os.path.exists(directory):
+    #     os.makedirs(directory)
+    # electricity_results['sequences'].to_csv(directory+'el_seq.csv')
+    # electricity_results['scalars'].to_csv(directory+'el_scal.csv')
+    #
+    # results_filename = directory+'results_dict.pickle'
+    # pickle_out = open(results_filename, "wb")
+    # pickle.dump(param_results_scalars, pickle_out)
+    # pickle_out.close()
 
     # energysystem.results['main'] = processing.results(om)
     # energysystem.results['meta'] = processing.meta_results(om)

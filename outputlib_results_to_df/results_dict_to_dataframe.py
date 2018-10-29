@@ -7,7 +7,7 @@ energysystem = solph.EnergySystem()
 energysystem.restore(dpath=os.path.dirname(os.path.abspath(__file__)), filename="energysystem.dump")
 
 # Getting results and views
-results = outputlib.processing.convert_keys_to_strings(energysystem.results)
+results = outputlib.processing.convert_keys_to_strings(energysystem.results['main'])
 print(results.keys())
 
 string_results = outputlib.processing.convert_keys_to_strings(results)
@@ -18,6 +18,7 @@ print(all_sequences)
 all_sequences.to_csv('all_sequences.csv')
 
 all_scalars = [value['scalars'] for (key, value) in string_results.items()]
+all_scalars = pd.DataFrame(all_scalars)
 print(all_scalars)
 all_scalars.to_csv('all_scalars.csv')
 

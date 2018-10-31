@@ -27,10 +27,11 @@ This example requires the latest version of oemof and matplotlib. Install by:
 import os
 import pandas as pd
 from oemof.solph import (Sink, Source, Transformer, Bus, Flow, Model,
-                         EnergySystem)
+                         EnergySystem, Investment)
 import oemof.outputlib as outputlib
 import pickle
 import matplotlib.pyplot as plt
+from oemof.tools import economics
 
 abs_path = os.path.dirname(os.path.abspath(__file__))
 
@@ -43,6 +44,7 @@ datetimeindex = pd.date_range('1/1/2016', periods=24*10, freq='H')
 energysystem = EnergySystem(timeindex=datetimeindex)
 filename = os.path.join(os.path.dirname(__file__), 'input_data.csv')
 data = pd.read_csv(filename, sep=",")
+invest = True
 
 # ######################### create energysystem components ################
 
@@ -98,11 +100,23 @@ energysystem.add(Transformer(
     outputs={bel: Flow(nominal_value=41, variable_costs=40)},
     conversion_factors={bel: 0.50}))
 
-energysystem.add(Transformer(
-    label='pp_oil',
-    inputs={boil: Flow()},
-    outputs={bel: Flow(nominal_value=5, variable_costs=50)},
-    conversion_factors={bel: 0.28}))
+if invest:
+
+    epc = economics.annuity(1000, 20, 0.05)
+    energysystem.add(Transformer(
+        label='pp_oil',
+        inputs={boil: Flow()},
+        outputs={bel: Flow(
+            investment=Investment(ep_costs=epc,
+                                    maximum=100))},
+        conversion_factors={bel: 0.28}))
+
+else:
+    energysystem.add(Transformer(
+        label='pp_oil',
+        inputs={boil: Flow()},
+        outputs={bel: Flow(nominal_value=5, variable_costs=50)},
+        conversion_factors={bel: 0.28}))
 
 # combined heat and power plant (chp)
 energysystem.add(Transformer(
@@ -136,7 +150,9 @@ optimization_model.solve(solver=solver,
                          solve_kwargs={'tee': True, 'keepfiles': False})
 
 # write back results from optimization object to energysystem
-energysystem.results = outputlib.processing.results(optimization_model)
+energysystem.results['main'] = outputlib.processing.results(optimization_model)
+energysystem.results['meta'] = outputlib.processing.meta_results(optimization_model)
+energysystem.results['param'] = outputlib.processing.parameter_as_dict(optimization_model)
 
 # ################################ results ################################
 
@@ -150,6 +166,5 @@ energysystem.results = outputlib.processing.results(optimization_model)
 results = outputlib.processing.results(optimization_model)
 string_results = outputlib.views.convert_keys_to_strings(results)
 
-print(abs_path)
 # dump energysystem (to ~/home/user/.oemof by default)
 energysystem.dump(dpath=abs_path, filename='energysystem.dump')

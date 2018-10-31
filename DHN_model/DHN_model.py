@@ -6,10 +6,10 @@ import pandas as pd
 # Reference: Xuezhi Liu Phd 2014 https://orca.cf.ac.uk/57830/1/2014LiuXPhD.pdf
 
 # load incidence matrix
-in_mat = pd.read_csv('incidence_matrix.csv', header=0, index_col='pipe_no')
-print(in_mat.columns.tolist())
+network_data = pd.read_csv('edge_list.csv', header=0, index_col='pipe_no')
+print(network_data.columns.tolist())
 
-from_to = in_mat[['from_node', 'to_node']]
+from_to = network_data[['from_node', 'to_node']]
 print(from_to)
 
 from_to.to_csv('from_to.csv', index=False, header=False)
@@ -38,7 +38,7 @@ black_edges = [edge for edge in G.edges() if edge not in red_edges]
 pos = nx.circular_layout(G)
 pos = nx.spring_layout(G)
 pos = nx.fruchterman_reingold_layout(G)
-nx.draw_networkx_nodes(G, pos, cmap=plt.get_cmap('jet'), 
+nx.draw_networkx_nodes(G, pos, cmap=plt.get_cmap('jet'),
                        node_color = 'green', node_size = 100)
 nx.draw_networkx_labels(G, pos)
 nx.draw_networkx_edges(G, pos, edgelist=red_edges, edge_color='r', arrows=True)

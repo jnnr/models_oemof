@@ -5,12 +5,12 @@ import matplotlib.collections as collections
 import pandas as pd
 import numpy as np
 
-def draw_network(G, node_sizes, node_colors, edge_colors, edge_width):
+def draw_network(G, node_sizes, node_colors, edge_colors, edge_width, figsize):
     # pos = nx.circular_layout(G)
     # pos = nx.spring_layout(G)
     # pos = nx.fruchterman_reingold_layout(G.to_undirected())
     pos = {node_id: np.array([data['lon'], data['lat']]) for node_id, data in G.nodes(data=True)}
-    fig = plt.figure(figsize=(5,5))
+    fig = plt.figure(figsize=figsize)
     nodes = nx.draw_networkx_nodes(G, pos, node_size=node_sizes, node_color=node_colors)
     labels = nx.draw_networkx_labels(G, pos, font_color='w')
     edges = nx.draw_networkx_edges(G, pos, node_size=node_sizes, arrowstyle='->',

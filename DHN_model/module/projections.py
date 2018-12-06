@@ -102,7 +102,7 @@ def project_gdf(gdf, to_crs=None, to_latlong=False):
                        'proj' : 'utm',
                        'zone' : utm_zone,
                        'units': 'm'}
-            print(utm_crs)
+
             # project the GeoDataFrame to the UTM CRS
             projected_gdf = gdf.to_crs(utm_crs)
             
@@ -135,15 +135,10 @@ def project_graph(G, to_crs=None):
     # gdf_nodes['osmid'] = gdf_nodes['osmid'].astype(np.int64).map(make_str)
 
     # create a geometry column from x/y
-    gdf_nodes['geometry'] = gdf_nodes.apply(lambda row: Point(row['lat'], row['lon']), axis=1)
+    gdf_nodes['geometry'] = gdf_nodes.apply(lambda row: Point(row['lon'], row['lat']), axis=1)
 
-    print('before', gdf_nodes['geometry'][-2:])
-    print('before', gdf_nodes.crs)
-    print('end before')
     # project the nodes GeoDataFrame to UTM
     gdf_nodes_utm = project_gdf(gdf_nodes, to_crs=to_crs)
-    print('after', gdf_nodes_utm['geometry'][-2:])
-    print('after', gdf_nodes_utm.crs)
 
     # extract data for all edges that have geometry attribute
     edges_with_geom = []

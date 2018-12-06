@@ -6,7 +6,7 @@ import pandas as pd
 # Reference: Xuezhi Liu Phd 2014 https://orca.cf.ac.uk/57830/1/2014LiuXPhD.pdf
 
 # load incidence matrix
-network_data = pd.read_csv('edge_list.csv', header=0, index_col='pipe_no')
+network_data = pd.read_csv('data/edge_list.csv', header=0, index_col='pipe_no')
 print(network_data.columns.tolist())
 
 from_to = network_data[['from_node', 'to_node']]

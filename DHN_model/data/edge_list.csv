@@ -31,4 +31,3 @@ pipe_no,from_node,to_node,lenght_m,diameter_mm,heat_transfer_coefficient_W/mK,ro
 29,30,27,70.6,125,321,0.4
 30,30,6,261.8,125,321,0.4
 31,31,10,201.3,125,321,0.4
-32,0,32,201.3,125,321,0.4

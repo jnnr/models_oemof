@@ -105,24 +105,15 @@ input_dict = OrderedDict([('Q_cons', np.arange(1, 6, 0.2)),
                           ('rho', [951]),
                           ('eps', [0.01e-3]),
                           ('mu', [0.255e-3])])
-print(input_dict['k'][1])
-result_dict_scalar = OrderedDict()
 
-result_dict_vector = OrderedDict([('results', ['Q_prod',
-                                               'DT_cons_in',
-                                               'DT_prod_r',
-                                               'v [m/s]',
-                                               'pressure_loss [bar]',
-                                               'P_pump [kW]',
-                                               'Q_loss [MW]',
-                                               'loss [%]'])])
-
-result_dict_array = OrderedDict([('time', np.arange(0,8,2)),
-                                ('lat', np.arange(0,8,4))])
-
-result_dict_cube = OrderedDict([('time', np.arange(0,9,3)),
-                                ('lat', np.arange(0,8,2)),
-                                ('lon', np.arange(0,15,3))])
+result_dict = OrderedDict([('results', ['Q_prod',
+                                        'DT_cons_in',
+                                        'DT_prod_r',
+                                        'v [m/s]',
+                                        'pressure_loss [bar]',
+                                        'P_pump [kW]',
+                                        'Q_loss [MW]',
+                                        'loss [%]'])])
 
 
 def plot_data():
@@ -198,7 +189,7 @@ if os.path.isfile('single_pipe_calculations.nc') :
     sam_results = xr.open_dataarray('single_pipe_calculations.nc')
 else:
     print('Calculate')
-    sam_results = generic_sampling(input_dict, result_dict_vector,
+    sam_results = generic_sampling(input_dict, result_dict,
                               single_pipe)[0]
     sam_results.to_netcdf('single_pipe_calculations.nc')
 

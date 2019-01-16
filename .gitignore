@@ -1,5 +1,12 @@
 *.pickle
 *.pyc
 *.png
+*.pdf
+*.nc
+*.qgz
+*.csv
+*.lp
+*.dump
+.idea/
 .ipynb_checkpoints
 */.ipynb_checkpoints/*

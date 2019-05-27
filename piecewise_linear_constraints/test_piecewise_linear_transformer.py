@@ -4,11 +4,12 @@ from oemof.solph import (Sink, Transformer, Bus, Flow, Model,
 import oemof.outputlib as outputlib
 import oemof.solph as solph
 import numpy as np
+import matplotlib.pyplot as plt
 
 solver = 'cbc'
 
 # set timeindex and create data
-periods = 3
+periods = 10
 datetimeindex = pd.date_range('1/1/2019', periods=periods, freq='H')
 x = np.arange(0, periods, 1)
 demand = 50 * np.sin(x) + 50
@@ -40,4 +41,15 @@ results = outputlib.processing.results(optimization_model)
 string_results = outputlib.processing.convert_keys_to_strings(results)
 sequences = {k:v['sequences'] for k, v in string_results.items()}
 df = pd.concat(sequences, axis=1)
+df[('efficiency', None, None)] = df[('pwltf', 'electricity')].divide(df[('gas', 'pwltf')])
 print(df)
+
+fig, ax = plt.subplots()
+ax.scatter(df[('gas', 'pwltf')], df[('pwltf', 'electricity')], marker='.', c='r')
+x = np.arange(0,120,10)
+f = lambda x: 0.01 * x**2
+y = f(x)
+ax.plot(x, y)
+ax.set_ylabel('electricity output')
+ax.set_xlabel('gas input')
+plt.show()

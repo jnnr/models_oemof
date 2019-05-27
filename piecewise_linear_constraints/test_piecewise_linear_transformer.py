@@ -23,14 +23,17 @@ energysystem.add(Sink(label='demand', inputs={b_el: Flow(
     nominal_value=1, actual_value=demand, fixed=True)}))
 
 conv_func = lambda x: 0.01 * x**2
+in_breakpoints = np.arange(0, 300, 10)
+out_breakpoints = conv_func(in_breakpoints)
+
 pwltf = solph.custom.PiecewiseLinearTransformer(
     label='pwltf',
     inputs={b_gas: solph.Flow(
     nominal_value=220,
     variable_costs=1)},
     outputs={b_el: solph.Flow()},
-    in_breakpoints=[0, 0.25, 0.5, 0.75, 1],
-    out_breakpoints=[0, 0.05, 0.15, 0.25, 0.4],
+    in_breakpoints=in_breakpoints,
+    out_breakpoints=out_breakpoints,
     conversion_function=conv_func,
     pw_repn='CC')
 

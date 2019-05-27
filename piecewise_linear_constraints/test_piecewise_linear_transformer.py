@@ -22,14 +22,17 @@ energysystem.add(b_gas, b_el)
 energysystem.add(Sink(label='demand', inputs={b_el: Flow(
     nominal_value=1, actual_value=demand, fixed=True)}))
 
+conv_func = lambda x: 0.01 * x**2
 pwltf = solph.custom.PiecewiseLinearTransformer(
     label='pwltf',
     inputs={b_gas: solph.Flow(
     nominal_value=220,
     variable_costs=1)},
     outputs={b_el: solph.Flow()},
-    x=[0, 0.25, 0.5, 0.75, 1],
-    y=[0, 0.05, 0.15, 0.25, 0.4])
+    in_breakpoints=[0, 0.25, 0.5, 0.75, 1],
+    out_breakpoints=[0, 0.05, 0.15, 0.25, 0.4],
+    conversion_function=conv_func,
+    pw_repn='CC')
 
 energysystem.add(pwltf)
 
@@ -49,8 +52,7 @@ print(df)
 fig, ax = plt.subplots()
 ax.scatter(df[('gas', 'pwltf')], df[('pwltf', 'electricity')], marker='.', c='r')
 x = np.arange(0,120,10)
-f = lambda x: 0.01 * x**2
-y = f(x)
+y = conv_func(x)
 ax.plot(x, y)
 ax.set_ylabel('electricity output')
 ax.set_xlabel('gas input')

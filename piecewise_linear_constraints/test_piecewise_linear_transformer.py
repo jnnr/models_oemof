@@ -9,10 +9,10 @@ import matplotlib.pyplot as plt
 solver = 'cbc'
 
 # set timeindex and create data
-periods = 10
+periods = 20
 datetimeindex = pd.date_range('1/1/2019', periods=periods, freq='H')
 x = np.arange(0, periods, 1)
-demand = 50 * np.sin(x) + 50
+demand = 50 * np.sin(0.8*x) + 50
 
 # set up EnergySystem
 energysystem = EnergySystem(timeindex=datetimeindex)
@@ -23,7 +23,7 @@ energysystem.add(Sink(label='demand', inputs={b_el: Flow(
     nominal_value=1, actual_value=demand, fixed=True)}))
 
 conv_func = lambda x: 0.01 * x**2
-in_breakpoints = np.arange(0, 300, 10)
+in_breakpoints = np.arange(0, 150, 30)
 out_breakpoints = conv_func(in_breakpoints)
 
 pwltf = solph.custom.PiecewiseLinearTransformer(
@@ -53,10 +53,10 @@ df[('efficiency', None, None)] = df[('pwltf', 'electricity')].divide(df[('gas', 
 print(df)
 
 fig, ax = plt.subplots()
-ax.scatter(df[('gas', 'pwltf')], df[('pwltf', 'electricity')], marker='.', c='r')
-x = np.arange(0,120,10)
+ax.scatter(df[('gas', 'pwltf')], df[('pwltf', 'electricity')], marker='x', c='r', s=40)
+x = in_breakpoints
 y = conv_func(x)
-ax.plot(x, y)
+ax.plot(x, y, marker='+', markersize=15)
 ax.set_ylabel('electricity output')
 ax.set_xlabel('gas input')
 plt.show()

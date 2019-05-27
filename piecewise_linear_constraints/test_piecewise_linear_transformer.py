@@ -22,14 +22,16 @@ energysystem.add(b_gas, b_el)
 energysystem.add(Sink(label='demand', inputs={b_el: Flow(
     nominal_value=1, actual_value=demand, fixed=True)}))
 
-energysystem.add(solph.custom.PiecewiseLinearTransformer(
+pwltf = solph.custom.PiecewiseLinearTransformer(
     label='pwltf',
     inputs={b_gas: solph.Flow(
     nominal_value=220,
     variable_costs=1)},
     outputs={b_el: solph.Flow()},
     x=[0, 0.25, 0.5, 0.75, 1],
-    y=[0, 0.05, 0.15, 0.25, 0.4]))
+    y=[0, 0.05, 0.15, 0.25, 0.4])
+
+energysystem.add(pwltf)
 
 # create and solve the optimization model
 optimization_model = Model(energysystem)

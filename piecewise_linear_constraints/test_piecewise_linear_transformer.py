@@ -38,7 +38,6 @@ optimization_model.solve(solver=solver,
 
 results = outputlib.processing.results(optimization_model)
 string_results = outputlib.processing.convert_keys_to_strings(results)
-sequences = {k:v['sequences']['flow'] for k, v in string_results.items()}
-df = pd.DataFrame(sequences)
-df[('efficiency',None)] = df[('pwltf', 'electricity')].divide(df[('gas', 'pwltf')])
+sequences = {k:v['sequences'] for k, v in string_results.items()}
+df = pd.concat(sequences, axis=1)
 print(df)

@@ -34,7 +34,108 @@ excess = Sink(label='excess', inputs={b_el: Flow()})
 demand = Sink(label='demand', inputs={b_el: Flow(nominal_value=1,
                                                  actual_value=demand,
                                                  fixed=True)})
-storage = GenericStorage()
+
+def calculate_storage_u_value(s_iso, lamb_iso, alpha_inside, alpha_outside):
+    r"""
+    Calculates the thermal transmittance (U-value) of a thermal storage.
+
+    Parameters
+    ----------
+    s_iso : numeric
+    lamb_iso : numeric
+    alpha_inside : numeric
+    alpha_outside : numeric
+
+    Returns
+    ------
+    u_value : numeric
+    """
+    denominator = 1 / alpha_inside + s_iso / lamb_iso + 1 / alpha_outside
+    u_value = 1 / denominator
+    return u_value
+
+def calculate_capacities(height, diameter, heat_capacity, density,
+                         temp_h, temp_c, nonusable_storage_volume):
+    r"""
+    Calculates the capacity, surface area, minimum and maximum storage level
+    of a stratified thermal storage
+
+    Parameters
+    ----------
+    height : numeric
+    diameter : numeric
+    heat_capacity: numeric
+    density : numeric
+    temp_h : numeric
+    temp_c : numeric
+    nonusable_storage_volume : numeric
+
+    Returns
+    -------
+    Q_N : numeric
+    surface : numeric
+    Q_max : numeric
+    Q_min : numeric
+    """
+    Q_N = diameter**2 * 1/4 * np.pi * height * heat_capacity * density *(temp_h - temp_c)
+    Q_max = Q_N * (1 - nonusable_storage_volume/2)
+    Q_min = Q_N * nonusable_storage_volume/2
+    surface = np.pi * diameter * height + 2 * np.pi * diameter**2 *1/4
+    return Q_N, surface, Q_max, Q_min
+
+def calculate_losses(u_value, surface, temp_h, temp_c):
+    r"""
+    Calculates loss rate and constant losses for a stratified thermal storage.
+
+    Parameters
+    ----------
+    u_value : numeric
+    surface : numeric
+    temp_h : numeric
+    temp_c : numeric
+
+    Returns
+    -------
+    loss_rate : numeric
+    loss_constant : numeric
+    """
+    loss_rate = u_value * surface * (temp_h - temp_c)
+    loss_constant = u_value * surface * (temp_c - temp_env)
+    return loss_rate, loss_constant
+
+height = 10 # [m]
+diameter = 4 # [m]
+density = 1 # [kg/m3]
+heat_capacity = 3 # [J/kgK]
+temp_h = 95 # [°C]
+temp_c = 60 # [°C]
+temp_env = 10 # [°C]
+inflow_conversion_factor = 0.9
+outflow_conversion_factor = 0.9
+nonusable_storage_volume = 0.2
+s_iso = 1
+lamb_iso = 1
+alpha_inside = 1
+alpha_outside = 1
+
+u_value = calculate_storage_u_value(s_iso, lamb_iso, alpha_inside, alpha_outside)
+
+Q_N, surface, Q_max, Q_min = calculate_capacities(height, diameter, heat_capacity, density,
+                                                  temp_h, temp_c, nonusable_storage_volume)
+
+loss_rate, loss_constant = calculate_losses(u_value, surface, temp_h, temp_c)
+
+# storage = GenericStorage(label='storage',
+#                          inputs={b_el: Flow(variable_costs=0.0001)},
+#                          outputs={b_el: Flow()},
+#                          nominal_storage_capacity=15,
+#                          initial_storage_level=0.75,
+#                          #min_storage_level=Q_min,
+#                          #max_storage_level=Q_max,
+#                          loss_rate=0.1,
+#                          loss_constant=0.,
+#                          inflow_conversion_factor=1.,
+#                          outflow_conversion_factor=1.)
 
 storage = GenericStorage(label='storage',
                          inputs={b_el: Flow(variable_costs=0.0001)},

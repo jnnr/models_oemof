@@ -54,8 +54,8 @@ def calculate_storage_u_value(s_iso, lamb_iso, alpha_inside, alpha_outside):
     u_value = 1 / denominator
     return u_value
 
-def calculate_capacities(height, diameter, heat_capacity, density,
-                         temp_h, temp_c, nonusable_storage_volume):
+def calculate_capacities(height, diameter, temp_h, temp_c, nonusable_storage_volume,
+                         heat_capacity=4180, density=971.78):
     r"""
     Calculates the nominal storage capacity, surface area, minimum
     and maximum storage level of a stratified thermal storage.
@@ -64,11 +64,11 @@ def calculate_capacities(height, diameter, heat_capacity, density,
     ----------
     height : numeric
     diameter : numeric
-    heat_capacity: numeric
-    density : numeric
     temp_h : numeric
     temp_c : numeric
     nonusable_storage_volume : numeric
+    heat_capacity: numeric
+    density : numeric
 
     Returns
     -------

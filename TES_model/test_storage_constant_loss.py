@@ -57,8 +57,8 @@ def calculate_storage_u_value(s_iso, lamb_iso, alpha_inside, alpha_outside):
 def calculate_capacities(height, diameter, heat_capacity, density,
                          temp_h, temp_c, nonusable_storage_volume):
     r"""
-    Calculates the capacity, surface area, minimum and maximum storage level
-    of a stratified thermal storage
+    Calculates the nominal storage capacity, surface area, minimum
+    and maximum storage level of a stratified thermal storage.
 
     Parameters
     ----------
@@ -72,16 +72,16 @@ def calculate_capacities(height, diameter, heat_capacity, density,
 
     Returns
     -------
-    Q_N : numeric
+    nominal_storage_capacity : numeric
     surface : numeric
-    Q_max : numeric
-    Q_min : numeric
+    max_storage_level : numeric
+    min_storage_level : numeric
     """
-    Q_N = diameter**2 * 1/4 * np.pi * height * heat_capacity * density *(temp_h - temp_c)
-    Q_max = Q_N * (1 - nonusable_storage_volume/2)
-    Q_min = Q_N * nonusable_storage_volume/2
+    nominal_storage_capacity = diameter**2 * 1/4 * np.pi * height * heat_capacity * density *(temp_h - temp_c)
+    max_storage_level = (1 - nonusable_storage_volume/2)
+    min_storage_level = nonusable_storage_volume/2
     surface = np.pi * diameter * height + 2 * np.pi * diameter**2 *1/4
-    return Q_N, surface, Q_max, Q_min
+    return nominal_storage_capacity, surface, max_storage_level, min_storage_level
 
 def calculate_losses(u_value, surface, temp_h, temp_c):
     r"""
@@ -120,8 +120,8 @@ alpha_outside = 1
 
 u_value = calculate_storage_u_value(s_iso, lamb_iso, alpha_inside, alpha_outside)
 
-Q_N, surface, Q_max, Q_min = calculate_capacities(height, diameter, heat_capacity, density,
-                                                  temp_h, temp_c, nonusable_storage_volume)
+nominal_storage_capacity, surface, max_storage_level, min_storage_level = calculate_capacities(height, diameter, heat_capacity, density,
+                                                                                               temp_h, temp_c, nonusable_storage_volume)
 
 loss_rate, loss_constant = calculate_losses(u_value, surface, temp_h, temp_c)
 

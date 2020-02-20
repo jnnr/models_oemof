@@ -1,5 +1,5 @@
 import pandas as pd
-from oemof.solph import (Sink, Transformer, Bus, Flow, Model,
+from oemof.solph import (Sink, Source, Bus, Flow, Model,
                          EnergySystem)
 import oemof.outputlib as outputlib
 import oemof.solph as solph
@@ -19,6 +19,7 @@ energysystem = EnergySystem(timeindex=datetimeindex)
 b_gas = Bus(label='gas', balanced=False)
 b_el = Bus(label='electricity')
 energysystem.add(b_gas, b_el)
+energysystem.add(Source(label='shortage', outputs={b_el: Flow(variable_costs=1e6)}))
 energysystem.add(Sink(label='demand', inputs={b_el: Flow(
     nominal_value=1, actual_value=demand, fixed=True)}))
 
@@ -33,7 +34,9 @@ pwltf = solph.custom.PiecewiseLinearTransformer(
     outputs={b_el: solph.Flow()},
     in_breakpoints=in_breakpoints,
     conversion_function=conv_func,
-    pw_repn='CC')
+    pw_repn='CC') # 'CC', 'DCC', 'INC', 'MC'
+
+# DCC TODO: Solve problem in outputlib with DCC
 
 energysystem.add(pwltf)
 
@@ -45,9 +48,10 @@ optimization_model.solve(solver=solver,
 
 results = outputlib.processing.results(optimization_model)
 string_results = outputlib.processing.convert_keys_to_strings(results)
+df = outputlib.processing.create_dataframe(optimization_model)
 sequences = {k:v['sequences'] for k, v in string_results.items()}
 df = pd.concat(sequences, axis=1)
-df[('efficiency', None, None)] = df[('pwltf', 'electricity')].divide(df[('gas', 'pwltf')])
+df[('efficiency', None, None)] = df[('pwltf', 'electricity', 'flow')].divide(df[('gas', 'pwltf', 'flow')])
 
 def linearized_func(func, x_break, x):
     y_break=func(x_break)
@@ -64,7 +68,7 @@ production_modeled = df[('pwltf', 'electricity')]['flow'].values
 print(np.allclose(production_modeled, production_expected))
 
 fig, ax = plt.subplots()
-ax.scatter(df[('gas', 'pwltf')], df[('pwltf', 'electricity')], marker='x', c='r', s=40)
+ax.scatter(df[('gas', 'pwltf', 'flow')], df[('pwltf', 'electricity','flow')], marker='x', c='r', s=40)
 x = in_breakpoints
 y = conv_func(x)
 ax.plot(x, y, marker='+', markersize=15)
